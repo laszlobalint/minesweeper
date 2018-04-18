@@ -24,16 +24,16 @@ var flagPlaces = [];
 var tempFlag = '';
 
 function menu () {
-  /* console.log(logo); */
+  console.log('MINESWEEPER PROJECT');
   console.log('Welcome to Minesweeper!');
   interFace = blockTile.init();
-  let menupoints = ['New Game'/* , 'High score' */, 'Credits'];
+  let menupoints = ['New Game', 'High score', 'Credits'];
   var menu = readlineSync.keyInSelect(menupoints, 'Please, select from the following menu points.');
   switch (menu) {
     case 0:
       levelsName();
       break;
-    /* case 1:
+    case 1:
       console.clear();
       var hofDiff = ['Easy', 'Medium', 'Hard'];
       var hof = readlineSync.keyInSelect(hofDiff, 'Which Hall Of Fame are you interested in?');
@@ -51,9 +51,8 @@ function menu () {
           hallOfFame('hard', 'hard', './topHard.txt');
           break;
       }
-      break; */
-    case 1:
-    /* case 2: */
+      break;
+    case 2:
       console.clear();
       plox.drawPepe(plox.pepe);
       console.log('Special thanks to the following people:');
@@ -74,15 +73,15 @@ function exit () {
 function result (saveTo) {
   results[hitcount] = player;
   console.log('Congratulations ' + player + '! You won! Your score is: ' + hitcount);
-  top.writeFileSync(saveTo, JSON.stringify(hitcount + newResult[hitcount]), 'utf-8');
+  top.appendFileSync(saveTo, JSON.stringify(hitcount + newResult[hitcount]), 'utf-8');
 }
 
-/* function hallOfFame (diff, diffName, readFrom) {
+function hallOfFame (diff, diffName, readFrom) {
   diff = JSON.parse(top.readFileSync(readFrom, 'utf-8'));
   console.log('The Hall Of Fame for ' + diffName + ' level');
   console.log(diff);
   readlineSync.keyIn('Press a key to return to menu.');
-} */
+}
 
 function step (numLimit, alfLimit) {
   switch (alfLimit) {
@@ -239,7 +238,6 @@ function levelsName () {
         console.log('Remaining flags:', 99 - flagcount);
         movement(22, 23, 99, 'topHard.txt', 23);
       }
-
       break;
   }
 }
