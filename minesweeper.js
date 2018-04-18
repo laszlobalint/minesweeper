@@ -9,8 +9,6 @@ const matgen = require('./modules/matgen');
 let player = '';
 var hitcount = 0;
 var flagcount = 0;
-var newResult = '';
-var results = {};
 var x = 0;
 var y = 0;
 var loop = true;
@@ -41,14 +39,17 @@ function menu () {
         case 0:
           console.clear();
           hallOfFame('easy', 'easy', './topEasy.txt');
+          readlineSync.keyIn('Press a key to return to the menu');
           break;
         case 1:
           console.clear();
           hallOfFame('medium', 'medium', './topMedium.txt');
+          readlineSync.keyIn('Press a key to return to the menu');
           break;
         case 2:
           console.clear();
           hallOfFame('hard', 'hard', './topHard.txt');
+          readlineSync.keyIn('Press a key to return to the menu');
           break;
       }
       break;
@@ -71,16 +72,29 @@ function exit () {
 }
 
 function result (saveTo) {
-  results[hitcount] = player;
   console.log('Congratulations ' + player + '! You won! Your score is: ' + hitcount);
-  top.appendFileSync(saveTo, JSON.stringify(hitcount + newResult[hitcount]), 'utf-8');
+  top.appendFileSync(saveTo, 'Number of hits: ' + hitcount + ' --- Players name: ' + player + ' --- Date: ' + date() + '\n', 'utf-8');
 }
 
 function hallOfFame (diff, diffName, readFrom) {
-  diff = JSON.parse(top.readFileSync(readFrom, 'utf-8'));
+  diff = top.readFileSync(readFrom, 'utf-8');
   console.log('The Hall Of Fame for ' + diffName + ' level');
   console.log(diff);
-  readlineSync.keyIn('Press a key to return to menu.');
+}
+
+function date () {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if (mm < 10) {
+    mm = '0' + mm;
+  }
+  today = mm + '/' + dd + '/' + yyyy;
+  return today;
 }
 
 function step (numLimit, alfLimit) {
