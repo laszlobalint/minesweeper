@@ -1,6 +1,4 @@
-module.exports = matgen;
-
-function matgen (matrixLength) {
+function matgen(matrixLength) {
   let matrix = [[]];
   for (let j = 0; j < matrixLength; j++) {
     matrix[j] = [];
@@ -10,3 +8,5 @@ function matgen (matrixLength) {
   }
   return matrix;
 }
+
+module.exports = matgen;

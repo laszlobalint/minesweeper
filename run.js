@@ -1,3 +1,3 @@
-const start = require('./minesweeper');
+const start = require("./minesweeper");
 
 start.menu();
